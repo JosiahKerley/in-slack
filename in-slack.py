@@ -32,7 +32,7 @@ settings = {
   'INSLACK_SHOW_COMMAND': True,
   'INSLACK_COMPOUND':     25,
   'INSLACK_STYLE':        'code',
-  'INSLACK_ICON_EMOJI':   ':construction:',
+  'INSLACK_ICON_EMOJI':   ':computer:',
   'INSLACK_USERNAME':     '%s@%s'%(pwd.getpwuid(os.getuid())[0],socket.gethostname())
 }
 
