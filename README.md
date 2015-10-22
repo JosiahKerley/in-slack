@@ -17,6 +17,6 @@ export INSLACK_CHANNEL=#general
 export INSLACK_SHOW_COMMAND=true
 export INSLACK_COMPOUND=25
 export INSLACK_STYLE=false
-export INSLACK_ICON_EMOJI=:construction:
+export INSLACK_ICON_EMOJI=:computer:
 export INSLACK_USERNAME=`hostname`
 ```
