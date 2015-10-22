@@ -43,8 +43,10 @@ for key in os.environ:
     val = os.environ[key]
     if val.isdigit():
       settings[key] = int(val)
-    elif val == 'True' or val == 'true' or val == 'False' or val == 'false':
-      settings[key] = bool(val)
+    elif val == 'True' or val == 'true':
+      settings[key] = True
+    elif val == 'False' or val == 'false':
+      settings[key] = False
     else:
       settings[key] = val
 
