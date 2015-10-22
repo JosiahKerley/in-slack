@@ -95,9 +95,10 @@ def run(command,show_command=settings['INSLACK_SHOW_COMMAND'],compound=settings[
     text = buff
     if style == 'code':
       text = '```%s```'%(text)
-    sendtoslack(text)
-    print(buff)
-    buff = ''
+    if not text == '``````':
+      sendtoslack(text)
+      print(buff)
+      buff = ''
 
 
 
