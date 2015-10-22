@@ -1,4 +1,5 @@
 #!/bin/bash
+# Usage: `bash < <(curl -s https://raw.githubusercontent.com/JosiahKerley/in-slack/master/install)
 mkdir -p /tmp/in-slack
 cd /tmp/in-slack
 curl -s https://raw.githubusercontent.com/JosiahKerley/in-slack/master/in-slack.py > in-slack.py
