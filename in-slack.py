@@ -20,8 +20,10 @@ import os
 import sys
 import pwd
 import json
+import shlex
 import socket
 import urllib2
+import argparse
 from subprocess import Popen, PIPE, STDOUT
 
 
@@ -55,6 +57,39 @@ for key in os.environ:
 if settings['INSLACK_WEBHOOK_URL'] == False:
   print('INSLACK_WEBHOOK_URL is unset!')
   sys.exit(1)
+
+
+## Parse user input
+command = sys.argv[1:]
+if command[0].startswith('-'):  ## Assuming you want inline options
+  parser = argparse.ArgumentParser(description='Command line utility for sending STDOUT to Slack')
+  parser.add_argument('--command',  '-c', action="store", dest="command",  default=False, help='Command to be executed', nargs='*')
+  parser.add_argument('--username', '-U', action="store", dest="username", default=None,  help='Slack Username to use')
+  parser.add_argument('--channel',  '-C', action="store", dest="channel",  default=None,  help='Channel to post to')
+  parser.add_argument('--url',      '-u', action="store", dest="url",      default=None,  help='Slack webhook url')
+  parser.add_argument('--emoji',    '-e', action="store", dest="emoji",    default=None,  help='Emoji icon to post with')
+  parser.add_argument('--compound', '-n', action="store", dest="compound", default=None,  help='Number of lines to compound per post')
+  parser.add_argument('--style',    '-s', action="store", dest="style",    default=None,  help='Style (code) of post')
+  results = parser.parse_args()
+  if not results.command:
+    print('No command specified! (use -c)')
+    sys.exit(1)
+  command = results.command
+  if not results.username == None:
+    settings['INSLACK_USERNAME'] = results.username
+  if not results.url == None:
+    settings['INSLACK_WEBHOOK_URL'] = results.url
+  if not results.channel == None:
+    settings['INSLACK_CHANNEL'] = results.channel
+  if not results.emoji == None:
+    if results.emoji.startswith(':'):
+      settings['INSLACK_ICON_EMOJI'] = results.emoji
+    else:
+      settings['INSLACK_EMOJI_ICON'] = ':%s:'%(results.emoji)
+  if not results.compound == None:
+    settings['INSLACK_COMPOUND'] = int(results.compound)
+  if not results.style == None:
+    settings['INSLACK_STYLE'] = results.style
 
 
 ## Send a string to slack
@@ -103,7 +138,6 @@ def run(command,show_command=settings['INSLACK_SHOW_COMMAND'],compound=settings[
       buff = ''
 
 
-
 ## Main
 if __name__ == "__main__":
-  run(sys.argv[1:])
+  run(command)
