@@ -13,7 +13,6 @@ setup(name='Distutils',
   author='Josiah Kerley',
   author_email='josiahkerley@gmail.com',
   url='https://github.com/JosiahKerley/in-slack',
-  packages=['distutils', 'distutils.command'],
 )
 
 
@@ -23,4 +22,4 @@ if 'install' in sys.argv:
     file_content = f.read()
   with open(install_file,'w') as f:
     f.write(file_content)
-  os.chmod(install_file,700)
+  os.system('chmod +x "%s"'%(install_file))
