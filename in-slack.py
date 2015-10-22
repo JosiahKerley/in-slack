@@ -64,12 +64,12 @@ command = sys.argv[1:]
 if command[0].startswith('-'):  ## Assuming you want inline options
   parser = argparse.ArgumentParser(description='Command line utility for sending STDOUT to Slack')
   parser.add_argument('--command',  '-c', action="store", dest="command",  default=False, help='Command to be executed', nargs='*')
-  parser.add_argument('--username', '-U', action="store", dest="username", default=None,  help='Slack Username to use')
-  parser.add_argument('--channel',  '-C', action="store", dest="channel",  default=None,  help='Channel to post to')
-  parser.add_argument('--url',      '-u', action="store", dest="url",      default=None,  help='Slack webhook url')
-  parser.add_argument('--emoji',    '-e', action="store", dest="emoji",    default=None,  help='Emoji icon to post with')
-  parser.add_argument('--compound', '-n', action="store", dest="compound", default=None,  help='Number of lines to compound per post')
-  parser.add_argument('--style',    '-s', action="store", dest="style",    default=None,  help='Style (code) of post')
+  parser.add_argument('--username', '-U', action="store", dest="username", default=None,  help='Slack Username to use [%s]'%(str(settings['INSLACK_USERNAME'])))
+  parser.add_argument('--channel',  '-C', action="store", dest="channel",  default=None,  help='Channel to post to [%s]'%(str(settings['INSLACK_CHANNEL'])))
+  parser.add_argument('--url',      '-u', action="store", dest="url",      default=None,  help='Slack webhook url [%s]'%(str(settings['INSLACK_WEBHOOK_URL'])))
+  parser.add_argument('--emoji',    '-e', action="store", dest="emoji",    default=None,  help='Emoji icon to post with [%s]'%(str(settings['INSLACK_ICON_EMOJI'])))
+  parser.add_argument('--compound', '-n', action="store", dest="compound", default=None,  help='Number of lines to compound per post [%s]'%(str(settings['INSLACK_COMPOUND'])))
+  parser.add_argument('--style',    '-s', action="store", dest="style",    default=None,  help='Style (code) of post [%s]'%(str(settings['INSLACK_STYLE'])))
   results = parser.parse_args()
   if not results.command:
     print('No command specified! (use -c)')
