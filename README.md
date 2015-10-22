@@ -4,7 +4,9 @@ in-slack is a command line tool used to send STDOUT to slack.
 
 Usage
 =====
+```
 in-slack cat /etc/hosts
+```
 
 
 Settings:
