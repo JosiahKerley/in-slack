@@ -112,23 +112,18 @@ def run(command,show_command=settings['INSLACK_SHOW_COMMAND'],compound=settings[
   buff = ''
   proc = Popen(command, bufsize=1, stdout=PIPE, stderr=STDOUT, close_fds=True)
   for line in iter(proc.stdout.readline, b''):
+    print(line.replace('\n',''))
     if style == 'blockquote':
       buff += '> %s'%(line)
     else:
       buff += line
     line_count += 1
-    if compound:
-      if (line_count % compound) == 0:
-        text = buff
-        if style == 'code':
-          text = '```%s```'%(text)
-        sendtoslack(text)
-        print(buff)
-        buff = ''
-    else:
+    if (line_count % compound) == 0:
       text = buff
-      print(text)
+      if style == 'code':
+        text = '```%s```'%(text)
       sendtoslack(text)
+      buff = ''
   proc.stdout.close()
   proc.wait()
   if compound:
