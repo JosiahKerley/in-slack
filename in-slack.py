@@ -87,9 +87,11 @@ if command[0].startswith('-'):  ## Assuming you want inline options
 
 
 ## Send a string to slack
-def sendtoslack(text,url=settings['INSLACK_WEBHOOK_URL'], \
-                username=settings['INSLACK_USERNAME'], \
-                channel=settings['INSLACK_CHANNEL'],icon_emoji=settings['INSLACK_ICON_EMOJI']):
+def sendtoslack(text,
+                url=settings['INSLACK_WEBHOOK_URL'],
+                username=settings['INSLACK_USERNAME'],
+                channel=settings['INSLACK_CHANNEL'],
+                icon_emoji=settings['INSLACK_ICON_EMOJI']):
   values = {}
   values['text'] = text
   values['username'] = username
