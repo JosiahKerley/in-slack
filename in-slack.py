@@ -53,12 +53,6 @@ for key in os.environ:
       settings[key] = val
 
 
-## Verify settings
-if settings['INSLACK_WEBHOOK_URL'] == False:
-  print('INSLACK_WEBHOOK_URL is unset!')
-  sys.exit(1)
-
-
 ## Parse user input
 command = sys.argv[1:]
 if command[0].startswith('-'):  ## Assuming you want inline options
@@ -93,7 +87,9 @@ if command[0].startswith('-'):  ## Assuming you want inline options
 
 
 ## Send a string to slack
-def sendtoslack(text,url=settings['INSLACK_WEBHOOK_URL'],username=settings['INSLACK_USERNAME'],channel=settings['INSLACK_CHANNEL'],icon_emoji=settings['INSLACK_ICON_EMOJI']):
+def sendtoslack(text,url=settings['INSLACK_WEBHOOK_URL'], \
+                username=settings['INSLACK_USERNAME'], \
+                channel=settings['INSLACK_CHANNEL'],icon_emoji=settings['INSLACK_ICON_EMOJI']):
   values = {}
   values['text'] = text
   values['username'] = username
@@ -138,4 +134,11 @@ def run(command,show_command=settings['INSLACK_SHOW_COMMAND'],compound=settings[
 
 ## Main
 if __name__ == "__main__":
+
+  ## Verify settings
+  if settings['INSLACK_WEBHOOK_URL'] == False:
+    print('INSLACK_WEBHOOK_URL is unset!')
+    sys.exit(1)
+
+  ## Run
   run(command)
