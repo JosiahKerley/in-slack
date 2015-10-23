@@ -13,7 +13,7 @@ setup(name='Distutils',
   author='Josiah Kerley',
   author_email='josiahkerley@gmail.com',
   url='https://github.com/JosiahKerley/in-slack',
-  require=['argparse'],
+  requires=['argparse'],
 )
 
 
